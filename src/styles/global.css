@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #333;
+}
+
+header {
+  background: #000;
+  padding: 1rem;
+}
+header nav a {
+  color: #fff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #b22222, #000);
+  color: #fff;
+}
+.hero .cta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: gold;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.card img {
+  max-width: 250px;
+  border-radius: 8px;
+}
+
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}

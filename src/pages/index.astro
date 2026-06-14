@@ -1,17 +1,35 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Премиум Пицца & Лимонады">
+  <section class="hero">
+    <h1>Итальянская пицца и лимонады</h1>
+    <p>Премиальный вкус на итальянском оборудовании</p>
+    <a href="https://wa.me/77055606066" class="cta">Заказать в WhatsApp</a>
+  </section>
+
+  <section class="menu">
+    <h2>Наш ассортимент</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="/pizza-margherita.jpg" alt="Пицца Маргарита" />
+        <h3>Маргарита</h3>
+        <p>Классическая пицца с томатами и моцареллой</p>
+        <span>2500 ₸</span>
+      </div>
+      <div class="card">
+        <img src="/lemonade.jpg" alt="Домашний лимонад" />
+        <h3>Лимонад</h3>
+        <p>Освежающий напиток с натуральными фруктами</p>
+        <span>800 ₸</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>О нас</h2>
+    <p>Мы готовим на сертифицированном итальянском оборудовании, 
+       используем только свежие ингредиенты и гарантируем качество.</p>
+  </section>
+</Layout>

@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Главная</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>© 2026 Aziad Premium Frontend</p>
+    </footer>
+  </body>
+</html>
