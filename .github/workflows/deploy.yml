@@ -2,13 +2,13 @@ name: Deploy Astro Premium Frontend
 
 on:
   push:
-    branches: [ main ]   # деплой при пуше в main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # включаем Node.js 24 для всех экшенов
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -16,10 +16,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0   # Astro требует >=22.12.0 (можно сразу 24)
+          node-version: 22.12.0
 
       - name: Install dependencies
-        run: npm ci   # быстрее и надёжнее чем npm install
+        run: npm ci
 
       - name: Build Astro project
         run: npm run build
@@ -31,4 +31,5 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com   
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+            
