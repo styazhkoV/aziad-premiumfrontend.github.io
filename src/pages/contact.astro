@@ -3,17 +3,45 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Контакты">
-  <section class="contact-hero">
-    <h1>Свяжитесь с нами</h1>
-    <p>Мы всегда на связи и готовы принять ваш заказ.</p>
+  <section class="contact-hero" role="region" aria-label="Свяжитесь с нами">
+    <div class="container hero-inner">
+      <h1 class="display">Свяжитесь с нами</h1>
+      <p class="lead">Премиальная пицца и сервис. Быстро отвечаем и принимаем заказы.</p>
+    </div>
   </section>
 
-  <section class="contact-details">
-    <h2>Наши контакты</h2>
-    <ul>
-      <li>Телефон: <a href="tel:+77055606066">+7 705 560 60 66</a></li>
-      <li>WhatsApp: <a href="https://wa.me/77055606066" target="_blank">Написать в WhatsApp</a></li>
-      <li>Email: <a href="mailto:info@aziad.kz">info@aziad.kz</a></li>
-    </ul>
-  </section>
+  <main class="container">
+    <section class="contact-cards" aria-label="Контактные варианты">
+      <h2 class="section-title">Наши контакты</h2>
+      <div class="cards-grid" role="list">
+        <a role="listitem" class="contact-card" href="tel:+77055606066" aria-label="Позвонить +7 705 560 60 66">
+          <svg class="icon" width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 3h4l2 5-1.5 1.5a11 11 0 005 5L13 17l5 2v4a1 1 0 01-1 1C7.716 24 0 16.284 0 7a1 1 0 011-1z" fill="currentColor" opacity="0.9"/></svg>
+          <div class="card-body">
+            <strong>Телефон</strong>
+            <span class="muted">+7 705 560 60 66</span>
+          </div>
+        </a>
+
+        <a role="listitem" class="contact-card" href="https://wa.me/77055606066" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+          <svg class="icon" width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12a9.9 9.9 0 001.29 4.62L2 22l5.49-1.27A9.9 9.9 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zM16.6 14.1c-.3.8-1.8 1.4-2.5 1.6-.6.1-1.1.1-2.1-.5-.9-.6-2.1-1.6-3-2.7-.9-1-1.6-1.9-2.1-2.6-.2-.3-.1-.7.2-.9.6-.3 1.2-.6 1.8-.8.5-.1 1.1 0 1.4.4.3.4.8 1 1.2 1.4.4.4.8.6 1.2.9.3.2.7.4 1.1.3.4 0 .8-.1 1.2-.2.4-.1.8-.1 1.1.1.3.3.3.7.1 1.1z" fill="currentColor" /></svg>
+          <div class="card-body">
+            <strong>WhatsApp</strong>
+            <span class="muted">Чат и быстрые ответы</span>
+          </div>
+        </a>
+
+        <a role="listitem" class="contact-card" href="mailto:info@aziad.kz" aria-label="Отправить email info@aziad.kz">
+          <svg class="icon" width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor" /></svg>
+          <div class="card-body">
+            <strong>Email</strong>
+            <span class="muted">info@aziad.kz</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <a class="whatsapp-sticky" href="https://wa.me/77055606066" aria-label="Открыть чат в WhatsApp" title="WhatsApp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12a9.9 9.9 0 001.29 4.62L2 22l5.49-1.27A9.9 9.9 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zM16.6 14.1c-.3.8-1.8 1.4-2.5 1.6-.6.1-1.1.1-2.1-.5-.9-.6-2.1-1.6-3-2.7-.9-1-1.6-1.9-2.1-2.6-.2-.3-.1-.7.2-.9.6-.3 1.2-.6 1.8-.8.5-.1 1.1 0 1.4.4.3.4.8 1 1.2 1.4.4.4.8.6 1.2.9.3.2.7.4 1.1.3.4 0 .8-.1 1.2-.2.4-.1.8-.1 1.1.1.3.3.3.7.1 1.1z" fill="white"/></svg>
+  </a>
 </Layout>

@@ -3,24 +3,58 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="О бренде Aziad">
-  <section class="about-hero">
-    <h1>О нашем бренде</h1>
-    <p>Мы создаём премиальные блюда на сертифицированном итальянском оборудовании, 
-       используя только свежие ингредиенты и проверенные рецепты.</p>
+  <section class="about-hero" role="region" aria-label="О бренде" style="background-image: url('/pizza-margherita.jpg');">
+    <div class="overlay"></div>
+    <div class="container hero-inner">
+      <h1 class="display">О нашем бренде</h1>
+      <p class="lead">Мы создаём премиальные блюда на сертифицированном итальянском оборудовании, используя только свежие ингредиенты.</p>
+    </div>
   </section>
 
-  <section class="about-details">
-    <h2>Почему выбирают нас?</h2>
-    <ul>
-      <li>Итальянские печи и оборудование</li>
-      <li>Только свежие продукты от локальных поставщиков</li>
-      <li>Прозрачность и гарантии качества</li>
-    </ul>
-  </section>
+  <main class="container">
+    <section class="why-choose" aria-label="Почему выбирают нас">
+      <h2 class="section-title">Почему выбирают нас?</h2>
+      <div class="why-grid">
+        <article class="why-card">
+          <svg class="icon" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2 5h5l-4 3 2 6-5-3-5 3 2-6-4-3h5z" fill="currentColor"/></svg>
+          <h3>Итальянские печи</h3>
+          <p>Современное и сертифицированное оборудование для идеального вкуса.</p>
+        </article>
 
-  <section class="about-gallery">
-    <h2>Наша кухня</h2>
-    <img src="/pizza-margherita.jpg" alt="Итальянская пицца" />
-    <img src="/lemonade.jpg" alt="Лимонад" />
-  </section>
+        <article class="why-card">
+          <svg class="icon" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="currentColor"/></svg>
+          <h3>Свежие продукты</h3>
+          <p>Локальные поставщики и строгий контроль качества.</p>
+        </article>
+
+        <article class="why-card">
+          <svg class="icon" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z" fill="currentColor"/></svg>
+          <h3>Гарантия качества</h3>
+          <p>Прозрачность процессов и гарантия вкуса каждого блюда.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="Галерея">
+      <h2 class="section-title">Наша кухня</h2>
+      <div class="carousel" tabindex="0">
+        <img src="/pizza-margherita.jpg" alt="Итальянская пицца" loading="lazy" />
+        <img src="/lemonade.jpg" alt="Лимонад" loading="lazy" />
+      </div>
+      <div class="carousel-controls">
+        <button class="prev" aria-label="Предыдущая">‹</button>
+        <button class="next" aria-label="Следующая">›</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    const carousel = document.querySelector('.carousel');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    let idx = 0;
+    prev?.addEventListener('click', () => { carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' }); });
+    next?.addEventListener('click', () => { carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' }); });
+    // touch swipe handled by native scroll-snap
+  </script>
 </Layout>

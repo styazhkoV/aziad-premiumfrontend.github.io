@@ -1,35 +1,208 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { safeFetch } from '../lib/safeFetch';
+import { API_BASE_URL } from '../lib/api';
+interface Pizza {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+interface Drink {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+interface OrderItem {
+  id: number;
+  orderId: number;
+  pizzaId: number;
+  quantity: number;
+  price: number;
+}     
+interface Order {
+  id: number;
+  customerId: number;
+  date: string;
+  status: string;
+  total: number;
+  items: OrderItem[];
+} 
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  error?: string;
+}
+interface ApiError {
+  success: boolean;
+  error: string;
+}
+interface ApiResponseWithError<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+}
+interface FetchPizzasResponse extends ApiResponse<Pizza[]> {}
+interface FetchDrinksResponse extends ApiResponse<Drink[]> {}
+interface FetchOrdersResponse extends ApiResponse<Order[]> {}       
+interface FetchErrorResponse extends ApiError {}
+interface FetchPizzasResult extends ApiResponseWithError<Pizza[]> {}
+interface FetchDrinksResult extends ApiResponseWithError<Drink[]> {}
+interface FetchOrdersResult extends ApiResponseWithError<Order[]> {}    
+interface FetchPizzasOptions {
+  signal?: AbortSignal;
+}
+interface FetchDrinksOptions {
+  signal?: AbortSignal;
+}
+interface FetchOrdersOptions {
+  signal?: AbortSignal;
+}   
+interface ApiClient {
+  fetchPizzas(options?: FetchPizzasOptions): Promise<FetchPizzasResult>;
+  fetchDrinks(options?: FetchDrinksOptions): Promise<FetchDrinksResult>;
+  fetchOrders(options?: FetchOrdersOptions): Promise<FetchOrdersResult>;
+}
+interface ApiClientConfig {
+  baseUrl: string;
+  timeout?: number;
+}
+interface Pizza {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+
+interface Drink {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+}
+
+interface OrderItem {
+  id: number;
+  orderId: number;
+  pizzaId: number;
+  quantity: number;
+  price: number;
+}
+
+interface Order {
+  id: number;
+  customerId: number;
+  date: string;
+  status: string;
+  total: number;
+  items: OrderItem[];
+}
+
+// Simple server-side fetch helpers
+async function fetchPizzas(): Promise<Pizza[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/Pizzas`);
+    if (!res.ok) return [];
+    return (await res.json()) as Pizza[];
+  } catch {
+    return [];
+  }
+}
+
+async function fetchDrinks(): Promise<Drink[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/Drinks`);
+    if (!res.ok) return [];
+    return (await res.json()) as Drink[];
+  } catch {
+    return [];
+  }
+}
+
+async function fetchOrders(): Promise<Order[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/Orders`);
+    if (!res.ok) return [];
+    return (await res.json()) as Order[];
+  } catch {
+    return [];
+  }
+}
+
+const pizzas: Pizza[] = await fetchPizzas();
+const drinks: Drink[] = await fetchDrinks();
+const orders: Order[] = await fetchOrders();
 ---
 
 <Layout title="Премиум Пицца & Лимонады">
-  <section class="hero">
-    <h1>Итальянская пицца и лимонады</h1>
-    <p>Премиальный вкус на итальянском оборудовании</p>
-    <a href="https://wa.me/77055606066" class="cta">Заказать в WhatsApp</a>
-  </section>
-
-  <section class="menu">
-    <h2>Наш ассортимент</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="/pizza-margherita.jpg" alt="Пицца Маргарита" />
-        <h3>Маргарита</h3>
-        <p>Классическая пицца с томатами и моцареллой</p>
-        <span>2500 ₸</span>
-      </div>
-      <div class="card">
-        <img src="/lemonade.jpg" alt="Домашний лимонад" />
-        <h3>Лимонад</h3>
-        <p>Освежающий напиток с натуральными фруктами</p>
-        <span>800 ₸</span>
-      </div>
+  <!-- Hero -->
+  <section class="hero hero-oven" role="region" aria-label="Пицца премиум‑класса">
+    <div class="overlay"></div>
+    <div class="container hero-inner">
+      <h1 class="display">Пицца премиум‑класса на итальянском оборудовании</h1>
+      <p class="lead">Искусство вкуса, свежие ингредиенты и быстрый сервис.</p>
+      <a href="#configurator" class="cta btn-primary" aria-label="Заказать сейчас">Заказать сейчас</a>
     </div>
   </section>
 
-  <section class="about">
-    <h2>О нас</h2>
-    <p>Мы готовим на сертифицированном итальянском оборудовании, 
-       используем только свежие ингредиенты и гарантируем качество.</p>
-  </section>
+  <main class="container">
+    <!-- Конфигуратор -->
+    <section id="configurator" class="configurator" aria-label="Конфигуратор пиццы">
+      <!-- твой код конфигуратора -->
+    </section>
+
+    <!-- Меню: Пиццы -->
+    <section class="menu" aria-label="Меню пицц">
+      <h2 class="section-title">Наши пиццы</h2>
+      <div class="cards">
+        {pizzas.map((pizza: Pizza) => (
+          <article class="card">
+            <h3>{pizza.name}</h3>
+            <p>{pizza.description}</p>
+            <span class="price-tag">{pizza.price} ₸</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Меню: Напитки -->
+    <section class="menu" aria-label="Меню напитков">
+      <h2 class="section-title">Наши напитки</h2>
+      <div class="cards">
+        {drinks.map((drink: Drink) => (
+          <article class="card">
+            <h3>{drink.name}</h3>
+            <p>{drink.description}</p>
+            <span class="price-tag">{drink.price} ₸</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Последние заказы -->
+    <section class="orders" aria-label="Последние заказы">
+      <h2 class="section-title">Последние заказы</h2>
+      <div class="cards">
+        {orders.slice(0, 5).map((order: Order) => (
+          <article class="card">
+            <h3>Заказ #{order.id}</h3>
+            <p>Статус: {order.status}</p>
+            <p>Итого: {order.total} ₸</p>
+            <small>{new Date(order.date).toLocaleDateString()}</small>
+            <ul>
+              {order.items.map((item: OrderItem) => (
+                <li>Пицца #{item.pizzaId}, {item.quantity} шт. — {item.price} ₸</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky корзина -->
+  <button id="cartButton" class="cart-sticky" aria-label="Открыть корзину" title="Корзина">
+    🛒<span id="cartCount" class="cart-count">0</span>
+  </button>
 </Layout>
